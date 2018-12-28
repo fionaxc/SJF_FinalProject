@@ -1,0 +1,78 @@
+Team Members: Fiona Cai, Soojin Choi, Joyce Liao
+
+Description: BattleShip
+
+User Interface: terminal
+
+Technical Design:
+Topics covered in class:
+- networking to connect to multiple computers
+-
+
+Breakdown of Project:
+-
+
+Roles:
+- Fiona:
+
+- Soojin:
+
+- Joyce:
+
+
+Data Structures:
+-
+
+Algorithms Used:
+-
+
+
+Timeline:
+- 12/27:
+- 1/2:
+- 1/9:
+- 1/11:
+Team Tha Swami: Jack Cruse, Grace Cuenca and Naotaka Kinoshita
+
+Description: Mini Arcade with Whack-a-mole / Memory Matrix (MVP), Tetris if time
+
+User Interface: The terminal
+
+Technical Design:
+Topics covered in class:
+- networking to connect to multiple computers
+- server/client connections within network
+- processes (ex. forking) to pass repeated child processes to other computers
+- files because sockets are files
+- signals to end/start processes on all connected computers
+
+Project Breakdown:
+- Phase I: Whack-a-mole Phase
+  - adding this game is our project at its most basic state
+- Phase II: Scrolling Text
+  - after implementing whack-a-mole, sending text through connected computers should come naturally
+- Phase III: Memory Matrix
+  - Connected computers randomly change color and user must press them in order
+- Phase IV: Tetris
+
+Data Structures:
+- home-made structs for sending information
+struct message {
+  //tbd
+}
+
+Algorithms:
+- random number generator (randomly send data to other comps in network)
+
+Team Roles:
+EVERYONE WORKING ON EVERY PHASE!!
+- Grace: networking, setting up server, signals
+- Jack: networking, client (sending back to server), processes
+- Naotaka: networking, client (sending back to server), processes
+
+Timeline:
+- 12/27-29: Finalize design and team roles
+- 1/5: Basic program for changing colors in terminal (without networking)
+- 1/12: Implement scrolling text (without networking)
+- 1/19: Implement networking on phases I and II, if time, begin working on phase III.
+- 1/26: Finish networking and phase III if possible. If phase III is completed by this time, try to do phase IV (highly unlikely)
