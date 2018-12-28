@@ -1,78 +1,40 @@
-Team Members: Fiona Cai, Soojin Choi, Joyce Liao
+Fiona Cai, Soojin Choi, Joyce Liao
 
-Description: BattleShip
-
-User Interface: terminal
+Description: Typing Test
 
 Technical Design:
-Topics covered in class:
-- networking to connect to multiple computers
--
+Working with files - storing text files that the user can select, maintaining a local scoreboard
+Finding information about files - listing the length of available files to let the user choose between short/long practice files
+Signals - used to clear all local data of the application
+Shared memory - used to store current best score for each level
+Semaphores - only one user can modify the leadership board at once
 
-Breakdown of Project:
--
+Description of Project:
+We are creating a typing helper application in the terminal. Each user enters their name and selects from a list of text files to use for their practice. If the user can’t decide on a file, they can choose the random file chooser, and a random file will be chosen. Once they begin typing, a timer will start and the user will begin typing based on the words displayed from their selected file. Afterwards, their total time and typing speed will be displayed. The user’s statistics will be added to a leadership board, with all previous results displayed as well.
 
-Roles:
+User Interface:
+All actions will be performed in the terminal.
+
+Roles: Everyone will be collaboratively working for the most part.
 - Fiona:
-
+Start menu and loading the correct text files based on the user’s selection
 - Soojin:
-
+Running the timer and calculating scores
 - Joyce:
+Recording best scores/adding scores to the main scoreboard
 
 
 Data Structures:
--
+A linked list (structs) for local high score board
+Structs for storing username, lesson, and statistics from a typing session
 
 Algorithms Used:
--
+Sorting user statistics for the leaderboard
+Random generator for random file chooser
 
 
 Timeline:
-- 12/27:
-- 1/2:
-- 1/9:
-- 1/11:
-Team Tha Swami: Jack Cruse, Grace Cuenca and Naotaka Kinoshita
-
-Description: Mini Arcade with Whack-a-mole / Memory Matrix (MVP), Tetris if time
-
-User Interface: The terminal
-
-Technical Design:
-Topics covered in class:
-- networking to connect to multiple computers
-- server/client connections within network
-- processes (ex. forking) to pass repeated child processes to other computers
-- files because sockets are files
-- signals to end/start processes on all connected computers
-
-Project Breakdown:
-- Phase I: Whack-a-mole Phase
-  - adding this game is our project at its most basic state
-- Phase II: Scrolling Text
-  - after implementing whack-a-mole, sending text through connected computers should come naturally
-- Phase III: Memory Matrix
-  - Connected computers randomly change color and user must press them in order
-- Phase IV: Tetris
-
-Data Structures:
-- home-made structs for sending information
-struct message {
-  //tbd
-}
-
-Algorithms:
-- random number generator (randomly send data to other comps in network)
-
-Team Roles:
-EVERYONE WORKING ON EVERY PHASE!!
-- Grace: networking, setting up server, signals
-- Jack: networking, client (sending back to server), processes
-- Naotaka: networking, client (sending back to server), processes
-
-Timeline:
-- 12/27-29: Finalize design and team roles
-- 1/5: Basic program for changing colors in terminal (without networking)
-- 1/12: Implement scrolling text (without networking)
-- 1/19: Implement networking on phases I and II, if time, begin working on phase III.
-- 1/26: Finish networking and phase III if possible. If phase III is completed by this time, try to do phase IV (highly unlikely)
+12/28: Finish proposal
+1/9: Basic Textfiles and the start-up menu
+1/15: Using the timer, recording scores of each text.
+1/19: Setting up the score-board and adding scores to it
