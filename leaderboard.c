@@ -37,24 +37,39 @@ struct leaderboard * insert_new(char * new_name, double new_speed, double new_da
   new_person -> name = new_name;
   new_person -> typing_speed = new_speed;
   new_person -> date = new_date;
-  int curr_pos = 1;
+  int pos = 1;
 
+//if the new data is the first to be put in
   if (*curr == NULL){
 
     new_person -> next = curr;
-    main = new_person;
+    new_person -> curr_pos = pos;
+    curr = new_person;
     return curr;
 
   }
+//if the new entry is the top entry or is equal to the top entry.
   if ((curr -> typing_speed) <= new_speed){
 
+    new_person -> curr_pos = pos;
     if ((curr -> typing_speed) < new_speed){
 
-      new_speed = curr_pos;
+      //Everyone gets shifted down one position
+      new_person -> next = shift_pos(curr);
 
     }
+    else{
+
+      //No need to be shifted since the top are equal to each other.
+      new_person -> next = curr;
+    }
+    curr = new_person;
+    return curr;
 
   }
+
+  struct leaderboard * curr = *main;
+
   while (curr != NULL){
 
 
@@ -62,6 +77,20 @@ struct leaderboard * insert_new(char * new_name, double new_speed, double new_da
   }
 
 }
+
+struct leaderboard * shift_pos(struct leaderboard * old_pointer){
+
+  while(old_pointer != NULL){
+
+    old_pointer -> curr_pos = old_pointer -> curr_pos + 1;
+    old_pointer = old_pointer -> next;
+
+  }
+
+  return old_pointer;
+
+}
+
 
 struct leaderboard * free_list(){
 
