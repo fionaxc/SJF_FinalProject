@@ -3,17 +3,31 @@
 int main() {
 
     while (1) {
-        print_menu();
 
-        // send all keystrokes directly to stdin (read only one char)
-        system("/bin/stty raw");
-        // get user selection
+        // struct to store size of terminal;
+        struct winsize w;
+        ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+        print_menu(w.ws_row);
+
         char buffer;
-        buffer = fgetc(stdin);
-        // change to normal terminal setting
-        system ("/bin/stty cooked");
+        get_input(&buffer);
 
-        if (buffer == '3') { //exit is selected
+        if (buffer == '1') { // start new game
+            // printf("you have chosen to start a new game");
+            print_levels(w.ws_row);
+            get_input(&buffer);
+
+            // level selections
+            if (buffer == '1') { // easy
+
+            }
+        }
+
+        if (buffer == '2') {
+            printf("Leaderboard feature in progress\n");
+            sleep(3);
+        }
+        if (buffer == '3') { // exit is selected
             exit(1);
         }
     } // end while

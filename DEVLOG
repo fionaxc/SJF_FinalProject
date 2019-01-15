@@ -13,3 +13,7 @@ All: imported text files for typing test
 2019-01-11
 Joyce: start menu page: can now press a key and exit without pressing enter
 Fiona: setting up typing feature page and creating custom structs
+
+2019-01-15
+Joyce: added levels page (users can select from easy, medium, hard)
+       changed menu layout to take up entire terminal
