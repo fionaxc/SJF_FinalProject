@@ -19,3 +19,4 @@ typedef struct
 
 char ** getWords(char * story);
 void startGame(char ** dict);
+void store(char * name, char * level, int score);

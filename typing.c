@@ -22,9 +22,17 @@ char ** getWords(char * story){
   return dict;
 }
 
+//stores the newest score in allscores.txt file
+void store(char * name, char * level, int score){
+  File * f = fopen("allscores.txt", "a");
+  fprintf(f, "%s\n %s\n %d\n", name, level, score);
+  fclose(f);
+}
 
-
+//ACTUAL TYPING GAME FUNCTION
 void startGame(char ** dict){
+
+  //CHOOSING LEVEL OF DIFFICULTY; VARIES ON TIME ALLOCATED FOR GAME
   char * intro="THE TYPING GAME BY FIONA, SOOJIN, AND JOYCE \n Choose your level of difficulty:";
   char * s_easy="Easy: Press 1";
   char * s_medium="Medium: Press 2";
@@ -32,6 +40,24 @@ void startGame(char ** dict){
   char * s_default="You did not press a valid key; Default level is Medium";
 
   printf("%s\n %s\n %s\n %s\n", intro, s_easy, s_medium, s_hard);
+  char * level;
+  int time_limit;
+  getinput(&level);
+  if(level == '1'){
+    time_limit = 60;
+  }
+  else if(level == '2'){
+    time_limit = 45;
+  }
+  else if(level == '3'){
+    time_limit = 30;
+  }
+  else{
+    printf("%s\n", s_default);
+    time_limit = 30;
+  }
+
+  //STARTING ACTUAL GAME
   if(dict == 0){
     printf("Please input a valid dictionary\n");
     return;
@@ -45,11 +71,19 @@ void startGame(char ** dict){
   char input[100];
   int score = 0;
 
-  while (current < 60){ //currently easy level, CHANGE time later according to level
+  while (current < time_limit){ //currently easy level, CHANGE time later according to level
     randomWord(dict, word);
     printf("[%s]\n---------->\n", word);
     scanf("%s", input); //get the user's input word
-
+    for(int i = 0; input[i] != 0 && word[i] != 0; ++i){
+      if(input[i] == word[i]){
+        score++; //increase score by 1 for each correct letter
+      }
+    }
+    current = time(0) - start; //update current time
   }
-  
+
+  printf("Yay you have completed this game! This is your score [%d]\n", score);
+  store(name, level, score); //WRITE THIS FUNCTION1!!!!!!!
+  delay();
 }
