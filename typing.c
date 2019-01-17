@@ -49,14 +49,11 @@ void startGame(char ** dict){
   //CHOOSING LEVEL OF DIFFICULTY; VARIES ON TIME ALLOCATED FOR GAME
   printf("Choose your level of difficulty:\n");
   printf("1) Easy (60 seconds)\n");
-  printf("1) Medium (60 seconds)\n");
-  printf("1) Easy (60 seconds)\n");
-  char * s_easy="Easy (60 seconds): Press 1";
-  char * s_medium="Medium (45 seconds): Press 2";
-  char * s_hard="Hard (30 seconds): Press 3";
+  printf("2) Medium (45 seconds)\n");
+  printf("3) Hard (30 seconds)\n");
+
   char * s_default="You did not press a valid key; Default level is Medium";
 
-  printf("%s\n %s\n %s\n %s\n", intro, s_easy, s_medium, s_hard);
   char level[256];
   fgets(level, 256, stdin);
   int time_limit;
@@ -105,13 +102,13 @@ void startGame(char ** dict){
     }
     totalwords++;
     current = time(0) - start; //update current time
-    printf("%s | Current Score: %d | Current Time: %ld s \n", name, score, current);
+    printf("Current Score: %d | Current Time: %ld s \n", score, current);
   }
   accuracy = (score / ((double) totalletters)) * 100;
-  wpm = ((double)totalwords)/(current/60);
-  printf("Yay you have completed this game!\nYour score is %d.", score);
+  wpm = (totalwords)/((double)time_limit/60);
+  printf("Yay you have completed this game!\nYour score is %d.\n", score);
   printf("Words per minute: %.2f | Accuracy: %.2f\n",wpm, accuracy);
-  sleep(3);
+  sleep(5);
   store(name, score);
   sleep(1);
 }
