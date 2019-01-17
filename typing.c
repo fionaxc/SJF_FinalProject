@@ -10,20 +10,11 @@ char ** getWords(char * story){
   }
   //put lines into an array of strings
   char line[512];
-  char ** junk = malloc(2048 * sizeof(char *));
+  char ** dict = malloc(2048 * sizeof(char *));
   int i = 0;
   while (fgets(line, sizeof(line), f)){
-    strcpy(junk[i], line);
+    strcpy(dict[i], line);
     i++;
-  }
-
-  //parse each line on space, then put those into a dict
-  char ** dict = malloc(2048 * sizeof(char *));
-  int j = 0;
-  while(junk[j] != 0){
-    for(int k = 0; k < ARR_SIZE(dict) ;k++){
-      dict[k] = strsep(&junk[j], " ");
-    }
   }
 
   fclose(f);

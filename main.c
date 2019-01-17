@@ -1,4 +1,5 @@
 #include "pages.h"
+#include "typing.h"
 
 int main(int argc, char ** argv) {
 
@@ -19,13 +20,24 @@ int main(int argc, char ** argv) {
           printf("Which text would you like to play?\n");
           printf("Little Red Riding Hood --> Enter 1; \n");
           printf("Hamlet Soliloquy --> Enter 2; \n");
-          printf("Random Long Words in English --> Enter 1; \n");
+          printf("Random Long Words in English --> Enter 3; \n");
 
-          char ** dict = 
-          // level selections
-          if (buffer == '1') { //
-
+          char * story;
+          // text selection
+          if (buffer == '1') {
+            story = "lrrh.txt";
           }
+          if (buffer == '2'){
+            story = "hamlet.txt";
+          }
+          if (buffer == '3'){
+            story = "longwords.txt";
+          }
+
+          char ** dict = getWords(story);
+          printf("Ok! The game will now start!\n");
+          sleep(1);
+          startGame(dict);
       }
 
       if (buffer == '2') {

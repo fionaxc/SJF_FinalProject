@@ -11,5 +11,4 @@
 char ** getWords(char * story);
 void store(char * name, char * level, int score);
 void getRandomWord(char ** dict, char * chosenWord);
-
 void startGame(char ** dict);
