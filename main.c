@@ -4,12 +4,11 @@
 int main(int argc, char ** argv) {
 
     while (1) {
+
       // struct to store size of terminal;
       struct winsize w;
       ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
       print_menu(w.ws_row);
-      printf("WELCOME TO THE TYPING GAME BY FIONA, SOOJIN, AND JOYCE \n");
-
       char buffer;
       get_input(&buffer);
 

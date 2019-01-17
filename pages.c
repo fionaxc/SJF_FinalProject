@@ -1,7 +1,7 @@
 #include "pages.h"
 
 void print_menu(int term_size) {
-    printf("Typing Test\n\nPress the corresponding number key to select menu items\n\n1) Start New Game\n2) View Leaderboard\n3) Exit\n");
+    printf("WELCOME TO THE TYPING GAME BY FIONA, SOOJIN, AND JOYCE\n\nPress the corresponding number key to select menu items\n\n1) Start New Game\n2) View Leaderboard\n3) Exit\n");
     fill_screen(term_size, 8);
 }
 
