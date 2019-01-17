@@ -1,47 +1,30 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "leaderboard.h"
 
-struct leaderboard{char* name; int curr_pos; double typing_speed; double date; struct* leaderboard next;};
+void print_list(struct leaderboard * main){
 
-struct leaderboard main = NULL;
-
-void print_list(){
-
-  struct leaderboard * pointer = *main;
-  printf(" # | \n")
+  struct leaderboard * pointer = main;
+  printf("# | \n");
   while(pointer != NULL){
 
-    printf("%d | %s -- %lf...%lf\n", pointer -> curr_pos, pointer -> name, pointer -> typing_speed, pointer -> date );
+    printf("%d | %s -- %d\n", pointer -> curr_pos, pointer -> name, pointer -> typing_speed);
     pointer = (pointer -> next);
-    counter ++;
 
   }
 
 }
 
-struct leaderboard * increase_by_one (struct leaderboard * pointer){
+struct leaderboard * insert_new(struct leaderboard * main, char * new_name, int new_speed){
 
-  struct leaderboard * pointer = *main;
-  while(pointer != NULL){
-
-    pointer -> curr_pos = curr_pos + 1;
-
-  }
-
-}
-
-struct leaderboard * insert_new(char * new_name, double new_speed, double new_date ){
-
-  struct leaderboard * curr = *main;
+  struct leaderboard * curr = main;
   struct leaderboard * new_person = malloc(sizeof(struct leaderboard));
   new_person -> name = new_name;
   new_person -> typing_speed = new_speed;
-  new_person -> date = new_date;
   int pos = 1;
 
 //if the new data is the first to be put in
-  if (*curr == NULL){
+  if (curr == NULL){
 
+    printf("First! \n");
     new_person -> next = curr;
     new_person -> curr_pos = pos;
     curr = new_person;
@@ -64,22 +47,46 @@ struct leaderboard * insert_new(char * new_name, double new_speed, double new_da
       new_person -> next = curr;
     }
     curr = new_person;
-    return curr;
+    return new_person;
 
   }
 
-  struct leaderboard * curr = *main;
+  pos = pos + 1;
+  struct leaderboard * temp = curr;
+  struct leaderboard * prev = curr;
+  curr = curr -> next;
 
   while (curr != NULL){
 
+    if (new_speed > curr -> typing_speed){
 
+      new_person -> curr_pos = pos;
+      curr = shift_pos(curr);
+      new_person -> next = curr;
+      prev -> next = new_person;
+      return temp;
+
+    }
+    if (new_speed == curr -> typing_speed){
+
+      new_person -> curr_pos = pos;
+      new_person -> next = curr;
+      prev -> next = new_person;
+      return temp;
+
+    }
+    pos = pos + 1;
+    prev = curr;
+    curr = curr -> next;
 
   }
+  return NULL;
 
 }
 
 struct leaderboard * shift_pos(struct leaderboard * old_pointer){
 
+  struct leaderboard * temp = old_pointer;
   while(old_pointer != NULL){
 
     old_pointer -> curr_pos = old_pointer -> curr_pos + 1;
@@ -92,10 +99,11 @@ struct leaderboard * shift_pos(struct leaderboard * old_pointer){
 }
 
 
-struct leaderboard * free_list(){
+struct leaderboard * free_list(struct leaderboard * main){
 
-  struct * leaderboard pointer = *main;
-  struct node * prev = malloc(sizeof(struct leaderboard));
+  struct leaderboard * leaderboard = malloc(sizeof(struct leaderboard));
+  struct leaderboard * pointer = main;
+  struct leaderboard * prev = malloc(sizeof(struct leaderboard));
   prev = pointer;
   pointer = pointer -> next;
 
@@ -111,5 +119,22 @@ struct leaderboard * free_list(){
   prev = pointer;
 
   return prev;
+
+}
+
+int main(){
+
+  struct leaderboard * lb = malloc(sizeof(struct leaderboard));
+  lb = NULL;
+
+  lb = insert_new(lb, "char * new_name", 100  );
+  print_list(lb);
+  lb = insert_new(lb, "char * new_nam", 101  );
+  print_list(lb);
+  //lb = insert_new(lb, "char * new_na", 190  );
+  //lb = insert_new(lb, "char * new_n", 8  );
+  //lb = insert_new(lb, "char * new", 4 );
+  print_list(lb);
+
 
 }
