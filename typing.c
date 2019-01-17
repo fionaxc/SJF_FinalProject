@@ -1,14 +1,19 @@
 #include "typing.h"
 
 //stores the newest score in allscores.txt file
-void store(char * name, char * level, int score){
+void store(char * name, int score){
   FILE * f = fopen("allscores.txt", "a");
-  fprintf(f, "[%s] [%s] [%d]\n", name, level, score);
+  fprintf(f, "%d\n%s", score, name);
   fclose(f);
 }
 
 void getRandomWord(char ** dict, char * chosenWord){
-  sprintf(chosenWord, "%s", dict[rand() % ARR_SIZE(dict)]);
+  int len = 0;
+  int i = 0;
+  for(i = 0; dict[i] != NULL; ++i);
+  len = i;
+  i = rand()%len;
+  sprintf(chosenWord, "%s", dict[i]);
 }
 
 //Get the words from chosen story
@@ -37,12 +42,18 @@ char ** getWords(char * story){
 
 //ACTUAL TYPING GAME FUNCTION
 void startGame(char ** dict){
+  printf("What is your name?\n");
+  char name[256];
+  fgets(name, 256, stdin);
 
   //CHOOSING LEVEL OF DIFFICULTY; VARIES ON TIME ALLOCATED FOR GAME
-  char * intro="Choose your level of difficulty:\n";
-  char * s_easy="Easy: Press 1";
-  char * s_medium="Medium: Press 2";
-  char * s_hard="Hard: Press 3";
+  printf("Choose your level of difficulty:\n");
+  printf("1) Easy (60 seconds)\n");
+  printf("1) Medium (60 seconds)\n");
+  printf("1) Easy (60 seconds)\n");
+  char * s_easy="Easy (60 seconds): Press 1";
+  char * s_medium="Medium (45 seconds): Press 2";
+  char * s_hard="Hard (30 seconds): Press 3";
   char * s_default="You did not press a valid key; Default level is Medium";
 
   printf("%s\n %s\n %s\n %s\n", intro, s_easy, s_medium, s_hard);
@@ -60,9 +71,10 @@ void startGame(char ** dict){
   }
   else{
     printf("%s\n", s_default);
-    time_limit = 30;
+    time_limit = 45;
   }
 
+  printf("%d\n", time_limit);
   //STARTING ACTUAL GAME
   if(dict == 0){
     printf("Please input a valid dictionary\n");
@@ -75,24 +87,31 @@ void startGame(char ** dict){
 
   char word[100];
   char input[100];
+  float accuracy;
+  float wpm;
   int score = 0;
+  int totalletters = 0;
+  int totalwords = 0;
 
   while (current < time_limit){
     getRandomWord(dict, word);
-    printf("[%s]\n-----------------\n", word);
+    printf("[%s]\n--> ", word);
+    totalletters += strlen(word);
     scanf("%s", input); //get the user's input word
     for(int i = 0; input[i] != 0 && word[i] != 0; ++i){
       if(input[i] == word[i]){
         score++; //increase score by 1 for each correct letter
       }
     }
+    totalwords++;
     current = time(0) - start; //update current time
+    printf("%s | Current Score: %d | Current Time: %ld s \n", name, score, current);
   }
-
-  printf("Yay you have completed this game! This is your score [%d]\n", score);
-  printf("What is your name so we can store your score? \n");
-  char name[256];
-  fgets(name, 256, stdin);
-  store(name, level, score);
+  accuracy = (score / ((double) totalletters)) * 100;
+  wpm = ((double)totalwords)/(current/60);
+  printf("Yay you have completed this game!\nYour score is %d.", score);
+  printf("Words per minute: %.2f | Accuracy: %.2f\n",wpm, accuracy);
+  sleep(3);
+  store(name, score);
   sleep(1);
 }
