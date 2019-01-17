@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
-#include <unistd.h>
-#include <math.h>
+#include "typing.h"
 
 //Get the words from chosen story
 //input: file name, easy.txt, medium.txt, or hard.txt
@@ -13,13 +8,24 @@ char ** getWords(char * story){
     printf("Please input a valid story\n");
     exit(1);
   }
-  char input[512];
-  char ** dict = malloc(2048 * sizeof(char *));
+  //put lines into an array of strings
+  char line[512];
+  char ** junk = malloc(2048 * sizeof(char *));
   int i = 0;
-  while (fgets(input, sizeof(input), f)){
-    strcpy(dict[i], input);
+  while (fgets(line, sizeof(line), f)){
+    strcpy(junk[i], line);
     i++;
   }
+
+  //parse each line on space, then put those into a dict
+  char ** dict = malloc(2048 * sizeof(char *));
+  int j = 0;
+  while(junk[j] != 0){
+    for(int k = 0; k < ARR_SIZE(dict) ;k++){
+      dict[k] = strsep(&junk[j], " ");
+    }
+  }
+
   fclose(f);
   return dict;
 }
@@ -36,6 +42,7 @@ void getRandomWord(char ** dict, char * chosenWord){
 }
 
 
+
 //ACTUAL TYPING GAME FUNCTION
 void startGame(char ** dict){
 
@@ -47,16 +54,16 @@ void startGame(char ** dict){
   char * s_default="You did not press a valid key; Default level is Medium";
 
   printf("%s\n %s\n %s\n %s\n", intro, s_easy, s_medium, s_hard);
-  char * level;
+  char level[256];
+  fgets(level, 256, stdin);
   int time_limit;
-  getinput(&level);
-  if(level == '1'){
+  if(*level == '1'){
     time_limit = 60;
   }
-  else if(level == '2'){
+  else if(*level == '2'){
     time_limit = 45;
   }
-  else if(level == '3'){
+  else if(*level == '3'){
     time_limit = 30;
   }
   else{
