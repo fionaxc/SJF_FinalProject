@@ -3,6 +3,8 @@
 #include <time.h>
 #include <string.h>
 
+#define ARR_SIZE(arr) ( sizeof((arr)) / sizeof((arr[0])) )
+
 typedef struct
 {
 	char name[N];

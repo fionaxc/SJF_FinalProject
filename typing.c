@@ -8,15 +8,17 @@
 //Get the words from chosen story
 //input: file name, easy.txt, medium.txt, or hard.txt
 char ** getWords(char * story){
-  File * f = fopen(story, "r");
+  FILE * f = fopen(story, "r");
   if(f == 0){
     printf("Please input a valid story\n");
     exit(1);
   }
   char input[512];
   char ** dict = malloc(2048 * sizeof(char *));
+  int i = 0;
   while (fgets(input, sizeof(input), f)){
     strcpy(dict[i], input);
+    i++;
   }
   fclose(f);
   return dict;
@@ -24,16 +26,21 @@ char ** getWords(char * story){
 
 //stores the newest score in allscores.txt file
 void store(char * name, char * level, int score){
-  File * f = fopen("allscores.txt", "a");
+  FILE * f = fopen("allscores.txt", "a");
   fprintf(f, "%s\n %s\n %d\n", name, level, score);
   fclose(f);
 }
+
+void getRandomWord(char ** dict, char * chosenWord){
+  sprintf(chosenWord, "%s", dict[rand() % ARR_SIZE(dict)]);
+}
+
 
 //ACTUAL TYPING GAME FUNCTION
 void startGame(char ** dict){
 
   //CHOOSING LEVEL OF DIFFICULTY; VARIES ON TIME ALLOCATED FOR GAME
-  char * intro="THE TYPING GAME BY FIONA, SOOJIN, AND JOYCE \n Choose your level of difficulty:";
+  char * intro="Choose your level of difficulty:\n";
   char * s_easy="Easy: Press 1";
   char * s_medium="Medium: Press 2";
   char * s_hard="Hard: Press 3";
@@ -72,7 +79,7 @@ void startGame(char ** dict){
   int score = 0;
 
   while (current < time_limit){ //currently easy level, CHANGE time later according to level
-    randomWord(dict, word);
+    getRandomWord(dict, word);
     printf("[%s]\n---------->\n", word);
     scanf("%s", input); //get the user's input word
     for(int i = 0; input[i] != 0 && word[i] != 0; ++i){
@@ -84,6 +91,9 @@ void startGame(char ** dict){
   }
 
   printf("Yay you have completed this game! This is your score [%d]\n", score);
+  printf("What is your name so we can store your score? \n");
+  char name[256];
+  fgets(name, 256, stdin);
   store(name, level, score); //WRITE THIS FUNCTION1!!!!!!!
-  delay();
+  sleep(1);
 }

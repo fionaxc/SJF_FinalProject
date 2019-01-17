@@ -8,6 +8,7 @@ int main() {
         struct winsize w;
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
         print_menu(w.ws_row);
+        printf("WELCOME TO THE TYPING GAME BY FIONA, SOOJIN, AND JOYCE \n");
 
         char buffer;
         get_input(&buffer);
@@ -19,7 +20,7 @@ int main() {
 
             // level selections
             if (buffer == '1') { // easy
-
+              
             }
         }
 
