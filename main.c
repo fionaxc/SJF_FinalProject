@@ -4,25 +4,25 @@
 
 int main(int argc, char ** argv) {
 
-    char buffer;
+    char buffer = '\0';
     while (1) {
 
       // struct to store size of terminal;
       struct winsize w;
       ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
       print_menu(w.ws_row);
-      get_input(&buffer);
+      while (buffer!='1' && buffer!='2' && buffer!='3') {
+          get_input(&buffer);
+      }
 
       if (buffer == '1') { // start new game
           // printf("you have chosen to start a new game");
           //print_levels(w.ws_row);
 
-          printf("Which text would you like to play?\n");
-          printf("1) Little Red Riding Hood\n");
-          printf("2) Hamlet Soliloquy\n");
-          printf("3) Random Long Words in English\n");
-
-          get_input(&buffer);
+          print_options(w.ws_row);
+          while (buffer!='1' && buffer!='2' && buffer!='3') {
+              get_input(&buffer);
+          }
           char * story;
           // text selection
           if (buffer == '1') {
@@ -40,20 +40,20 @@ int main(int argc, char ** argv) {
           sleep(1);
           printf("NOW!\n");
           sleep(1);
+          create_sem();
           startGame(dict);
       }
 
       else if (buffer == '2') {
           print_lb();
           printf("\n\npress any key to go back to home\n");
-          system("/bin/stty raw");
-          buffer = fgetc(stdin);
-          system("/bin/stty cooked");
+          get_input(&buffer);
 
           //get_input(&buffer);
 
       }
       else if (buffer == '3') { // exit is selected
+          rm_sem();
           exit(1);
       }
 
