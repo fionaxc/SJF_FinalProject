@@ -1,5 +1,6 @@
 #include "pages.h"
 #include "typing.h"
+#include "leaderboard.h"
 
 int main(int argc, char ** argv) {
 
@@ -42,11 +43,13 @@ int main(int argc, char ** argv) {
           startGame(dict);
       }
 
-      if (buffer == '2') {
-          printf("Leaderboard feature in progress\n");
-          sleep(3);
+      else if (buffer == '2') {
+          print_lb();
+          printf("\n\npress any key to go back to home\n");
+          get_input(&buffer);
+
       }
-      if (buffer == '3') { // exit is selected
+      else if (buffer == '3') { // exit is selected
           exit(1);
       }
 
