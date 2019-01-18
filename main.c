@@ -4,18 +4,18 @@
 
 int main(int argc, char ** argv) {
 
+    char buffer;
     while (1) {
 
       // struct to store size of terminal;
       struct winsize w;
       ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
       print_menu(w.ws_row);
-      char buffer;
       get_input(&buffer);
 
       if (buffer == '1') { // start new game
           // printf("you have chosen to start a new game");
-          print_levels(w.ws_row);
+          //print_levels(w.ws_row);
 
           printf("Which text would you like to play?\n");
           printf("1) Little Red Riding Hood\n");
@@ -46,7 +46,11 @@ int main(int argc, char ** argv) {
       else if (buffer == '2') {
           print_lb();
           printf("\n\npress any key to go back to home\n");
-          get_input(&buffer);
+          system("/bin/stty raw");
+          buffer = fgetc(stdin);
+          system("/bin/stty cooked");
+
+          //get_input(&buffer);
 
       }
       else if (buffer == '3') { // exit is selected
