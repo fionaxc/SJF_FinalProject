@@ -30,7 +30,7 @@ void get_input(char * buffer_pt) {
 void create_sem(key_t key) {
     //create semaphore
     int sfd;
-    sfd = semget(key, 1, IPC_CREAT | IPC_EXCL | 0644);
+    sfd = semget(key, 1, IPC_CREAT | 0644);
     if (sfd == -1) {
         printf("semaphore error %d: %s\n", errno, strerror(errno));
     }
@@ -79,5 +79,6 @@ void print_options(int term_size) {
     printf("1) Little Red Riding Hood\n");
     printf("2) Hamlet Soliloquy\n");
     printf("3) Random Long Words in English\n");
-    fill_screen(term_size, 5);
+    printf("4) Return to Home Page\n");
+    fill_screen(term_size, 6);
 }

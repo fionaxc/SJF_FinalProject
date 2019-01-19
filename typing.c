@@ -1,4 +1,5 @@
 #include "typing.h"
+#include "pages.h"
 
 //stores the newest score in allscores.txt file
 void store(char * name, int score){
@@ -60,19 +61,19 @@ void startGame(char ** dict){
 
   char * s_default="You did not press a valid key; Default level is Medium";
 
-  char level[256];
-  fgets(level, 256, stdin);
+  char level;
+  get_input(&level);
   int time_limit;
-  if(*level == '1'){
+  if(level == '1'){
     time_limit = 60;
   }
-  else if(*level == '2'){
+  else if(level == '2'){
     time_limit = 45;
   }
-  else if(*level == '3'){
+  else if(level == '3'){
     time_limit = 30;
   }
-  else if(*level == '4'){
+  else if(level == '4'){
     return;
   }
   else{
