@@ -5,10 +5,8 @@
 #include <unistd.h>
 #include <math.h>
 
-#define ARR_SIZE(arr) ( sizeof((arr)) / sizeof((arr[0])) )
-
-
 char ** getWords(char * story);
 void store(char * name, int score);
+int arrLength(char ** dict);
 void getRandomWord(char ** dict, char * chosenWord);
 void startGame(char ** dict);
