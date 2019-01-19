@@ -12,8 +12,17 @@ All: imported text files for typing test
 
 2019-01-11
 Joyce: start menu page: can now press a key and exit without pressing enter
-Fiona: setting up typing feature page and creating custom structs
+Fiona: setting up typing feature page and creating custom structs; initial typing game function
 
 2019-01-15
 Joyce: added levels page (users can select from easy, medium, hard)
        changed menu layout to take up entire terminal
+
+2018-01-16
+Fiona (Wed Jan 16 21:23:09): wrote dictionary input function, choosing random word from dictionary, implemented difficulty levels; fixed memory allocation bugs
+
+2018-01-17
+Fiona (Thu Jan 17 18:32:53): editing main function for choosing text for game, fixing up visuals and testing typing game; wrote store score in a file function
+
+2019-01-18
+Fiona (Fri Jan 18 21:19:03): incorporating semaphore into typing game and saving score to leaderboard; finished typing game word for word
