@@ -95,9 +95,7 @@ void startGame(char ** dict){
     wpm = (totalwords)/((double)time_limit/60);
     printf("Yay you have completed this game!\nYour score is %d.\n", score);
     printf("Words per minute: %.2f | Accuracy: %.2f\n",wpm, accuracy);
-    sleep(5);
-    store(name, score);
-    sleep(1);
+
   }
 //--------------------------------------------------------------------------------//
 
@@ -167,9 +165,6 @@ void startGame(char ** dict){
     wpm = (totalwords)/((double)time_limit/60);
     printf("Yay you have completed this game!\nYour score is %d.\n", score);
     printf("Words per minute: %.2f | Accuracy: %.2f\n",wpm, accuracy);
-    sleep(5);
-    store(name, score);
-    sleep(1);
   }
 //--------------------------------------------------------------------------------//
 
@@ -247,10 +242,11 @@ void startGame(char ** dict){
     wpm = (totalwords)/((double)time_limit/60);
     printf("Yay you have completed this game!\nYour score is %d.\n", score);
     printf("Words per minute: %.2f | Accuracy: %.2f\n",wpm, accuracy);
-    sleep(5);
-    store(name, score);
-    sleep(1);
   }
+
+  sleep(5);
+  store(name, score);
+  sleep(1);
 
 
 }
