@@ -41,4 +41,4 @@ Joyce & Soojin (10:57): edited main to fix allow the exit out of leaderboard to 
 Joyce (15:24): wrote helper functions for creating, removing, up-ing, and down-ing semaphore
 Fiona (21:19): incorporating semaphore into typing game and saving score to leaderboard; finished typing game word for word
 Joyce (23:15): record username using shared memory, changed order of prompts prior to starting a game, added new story option "Hansel and Gretel"
-Soojin (00:09): updated readme to include the instructions and required libraries
+Soojin & Joyce (00:09): updated readme to include the instructions and required libraries
