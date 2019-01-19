@@ -5,24 +5,32 @@ PD 4
 
 ------------------------------------------------------------------
 2018-12-28
-All: finished design for project
+All (00:30): finished design for project
+
+2019-01-02
+Joyce & Soojin (10:58): updated README to include project description and roster
 
 2019-01-05
-All: imported text files for typing test
+All (10:48): imported text files for typing test
+
+2019-01-10
+Joyce (10:59): started working on main print_menu
 
 2019-01-11
-Joyce: start menu page: can now press a key and exit without pressing enter
-Fiona: setting up typing feature page and creating custom structs; initial typing game function
+Joyce (11:01): start menu page: can now press a key and exit without pressing enter
+Fiona (11:03): setting up typing feature page and creating custom structs; initial typing game function
 
 2019-01-15
-Joyce: added levels page (users can select from easy, medium, hard)
-       changed menu layout to take up entire terminal
+Joyce (10:54): added levels page (users can select from easy, medium, hard), changed menu layout to take up entire terminal
 
 2018-01-16
-Fiona (Wed Jan 16 21:23:09): wrote dictionary input function, choosing random word from dictionary, implemented difficulty levels; fixed memory allocation bugs
+Fiona (21:23): wrote dictionary input function, choosing random word from dictionary, implemented difficulty levels; fixed memory allocation bugs
 
 2018-01-17
-Fiona (Thu Jan 17 18:32:53): editing main function for choosing text for game, fixing up visuals and testing typing game; wrote store score in a file function
+Fiona (18:32): editing main function for choosing text for game, fixing up visuals and testing typing game; wrote store score in a file function
 
 2019-01-18
-Fiona (Fri Jan 18 21:19:03): incorporating semaphore into typing game and saving score to leaderboard; finished typing game word for word
+Joyce (00:40): wrote functions to display leaderboard from allscores.txt
+Joyce (15:24): wrote helper functions for creating, removing, up-ing, and down-ing semaphore
+Fiona (21:19): incorporating semaphore into typing game and saving score to leaderboard; finished typing game word for word
+Joyce (23:15): record username using shared memory, changed order of prompts prior to starting a game, added new story option "Hansel and Gretel"
