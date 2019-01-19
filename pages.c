@@ -25,7 +25,7 @@ void print_options(int term_size, char *name) {
     printf("3) Hansel and Gretel\n");
     printf("4) Random Long Words in English\n");
     printf("5) Return to Home Page\n");
-    fill_screen(term_size, 7);
+    fill_screen(term_size, 8);
 }
 
 void get_input(char * buffer_pt) {
