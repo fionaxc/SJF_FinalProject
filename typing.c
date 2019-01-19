@@ -46,11 +46,8 @@ char ** getWords(char * story){
 
 
 //ACTUAL TYPING GAME FUNCTION
-void startGame(char ** dict){
+void startGame(char ** dict, char * name){
   key_t key = ftok("makefile", 'a');
-  printf("What is your name?\n");
-  char name[256];
-  fgets(name, 256, stdin);
 
   //CHOOSING LEVEL OF DIFFICULTY; VARIES ON TIME ALLOCATED FOR GAME
   printf("Choose your level of difficulty:\n");
@@ -86,6 +83,18 @@ void startGame(char ** dict){
     printf("Please input a valid dictionary\n");
     return;
   }
+
+  printf("Ok! The game is about to start...\n");
+  fflush(stdout);
+  sleep(1);
+  printf("Ready\n");
+  fflush(stdout);
+  sleep(1);
+  printf("Set\n");
+  fflush(stdout);
+  sleep(1);
+  printf("GO!\n");
+
   srand(time(0));
 
   time_t start = time(0);

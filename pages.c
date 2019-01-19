@@ -17,6 +17,17 @@ void fill_screen(int term_size, int content_size) {
     }
 }
 
+void print_options(int term_size, char *name) {
+    printf("Player: %s", name);
+    printf("Which text would you like to play?\n");
+    printf("1) Little Red Riding Hood\n");
+    printf("2) Hamlet Soliloquy\n");
+    printf("3) Hansel and Gretel\n");
+    printf("4) Random Long Words in English\n");
+    printf("5) Return to Home Page\n");
+    fill_screen(term_size, 7);
+}
+
 void get_input(char * buffer_pt) {
     // send all keystrokes directly to stdin (read only one char)
     system("/bin/stty raw");
@@ -74,11 +85,36 @@ void up_sem(key_t key) {
     semop(sfd, &buffer, 1);
 }
 
-void print_options(int term_size) {
-    printf("Which text would you like to play?\n");
-    printf("1) Little Red Riding Hood\n");
-    printf("2) Hamlet Soliloquy\n");
-    printf("3) Random Long Words in English\n");
-    printf("4) Return to Home Page\n");
-    fill_screen(term_size, 6);
+char * get_username() {
+    key_t key;
+    key = ftok("makefile", 'b');
+
+    int sgid;
+    char *username;
+
+    //get id to shared segment
+    sgid = shmget(key, USERNAME_LEN, 0644 | IPC_CREAT);
+    //get pointer to segment specified by id
+    username = shmat(sgid, (void *) 0, 0);
+
+    if (*username) {
+        char buffer = '\0';
+        printf("Currently playing as %s", username);
+        printf("y) Confirm\nn) Switch User\n");
+        while (buffer!='y' && buffer!='n') {get_input(&buffer);}
+        if(buffer=='n') {
+            printf("Enter New Username (max 16 char): ");
+            fgets(username, USERNAME_LEN, stdin);
+            printf("Success! Playing as %s", username);
+            sleep(3);
+        }
+    }
+    else {
+        printf("Welcome new user!\nEnter Username (max 16 char): ");
+        fgets(username, USERNAME_LEN, stdin);
+        printf("Success! Playing as %s", username);
+        sleep(2);
+    }
+
+    return username;
 }
