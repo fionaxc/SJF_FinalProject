@@ -15,7 +15,9 @@ void print_menu(int term_size);
 void fill_screen(int term_size, int content_size);
 void get_input(char * buffer_pt);
 void print_options(int term_size);
-void create_sem();
-void rm_sem();
+void create_sem(key_t key);
+void up_sem(key_t key);
+void down_sem(key_t key);
+void rm_sem(key_t key);
 
 #endif

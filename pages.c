@@ -27,9 +27,7 @@ void get_input(char * buffer_pt) {
     system("/bin/stty cooked");
 }
 
-void create_sem() {
-    key_t key;
-    key = ftok("makefile", 'a');
+void create_sem(key_t key) {
     //create semaphore
     int sfd;
     sfd = semget(key, 1, IPC_CREAT | IPC_EXCL | 0644);
@@ -46,10 +44,16 @@ void create_sem() {
     }
 }
 
-void rm_sem() {
+void rm_sem(key_t key) {
     //remove semaphore
     int sfd;
-    key_t key = ftok("makefile", 'a');
+    sfd = semget(key, 1, 0);
+    down_sem(key);
+    semctl(sfd, 0, IPC_RMID);
+}
+
+void down_sem(key_t key) {
+    int sfd;
     sfd = semget(key, 1, 0);
     struct sembuf buffer;
     //down the semaphore
@@ -57,7 +61,17 @@ void rm_sem() {
     buffer.sem_num = 0;
     buffer.sem_flg = SEM_UNDO;
     semop(sfd, &buffer, 1);
-    semctl(sfd, 0, IPC_RMID);
+}
+
+void up_sem(key_t key) {
+    int sfd;
+    sfd = semget(key, 1, 0);
+    struct sembuf buffer;
+    //down the semaphore
+    buffer.sem_op = 1;
+    buffer.sem_num = 0;
+    buffer.sem_flg = SEM_UNDO;
+    semop(sfd, &buffer, 1);
 }
 
 void print_options(int term_size) {

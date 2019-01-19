@@ -10,6 +10,7 @@ int main(int argc, char ** argv) {
       // struct to store size of terminal;
       struct winsize w;
       ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+      key_t key = ftok("makefile", 'a');
       print_menu(w.ws_row);
       while (buffer!='1' && buffer!='2' && buffer!='3') {
           get_input(&buffer);
@@ -34,13 +35,12 @@ int main(int argc, char ** argv) {
           if (buffer == '3'){
             story = "longwords.txt";
           }
-
           char ** dict = getWords(story);
           printf("Ok! The game will start...");
           sleep(1);
           printf("NOW!\n");
           sleep(1);
-          create_sem();
+          create_sem(key);
           startGame(dict);
       }
 
@@ -53,7 +53,7 @@ int main(int argc, char ** argv) {
 
       }
       else if (buffer == '3') { // exit is selected
-          rm_sem();
+          rm_sem(key);
           exit(1);
       }
 

@@ -46,6 +46,7 @@ char ** getWords(char * story){
 
 //ACTUAL TYPING GAME FUNCTION
 void startGame(char ** dict){
+  key_t key = ftok("makefile", 'a');
   printf("What is your name?\n");
   char name[256];
   fgets(name, 256, stdin);
@@ -95,7 +96,15 @@ void startGame(char ** dict){
     wpm = (totalwords)/((double)time_limit/60);
     printf("Yay you have completed this game!\nYour score is %d.\n", score);
     printf("Words per minute: %.2f | Accuracy: %.2f\n",wpm, accuracy);
+<<<<<<< HEAD
 
+=======
+    sleep(5);
+    down_sem(key);
+    store(name, score);
+    up_sem(key);
+    sleep(1);
+>>>>>>> 9f5d184facd715dcb0e1feae290460e8343e0a40
   }
 //--------------------------------------------------------------------------------//
 
@@ -242,6 +251,13 @@ void startGame(char ** dict){
     wpm = (totalwords)/((double)time_limit/60);
     printf("Yay you have completed this game!\nYour score is %d.\n", score);
     printf("Words per minute: %.2f | Accuracy: %.2f\n",wpm, accuracy);
+<<<<<<< HEAD
+=======
+    sleep(5);
+    down_sem(key)
+    store(name, score);
+    sleep(1);
+>>>>>>> 9f5d184facd715dcb0e1feae290460e8343e0a40
   }
 
   sleep(5);
