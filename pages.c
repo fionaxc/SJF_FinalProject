@@ -1,10 +1,10 @@
 #include "pages.h"
 
-// union semun {		/*  */
-//     int     val;		/* value for SETVAL */
-//     struct  semid_ds *buf;  /* buffer for IPC_STAT & IPC_SET */
-//     u_short *array;         /* array for GETALL & SETALL */
-// };
+union semun {		/*  */
+    int     val;		/* value for SETVAL */
+    struct  semid_ds *buf;  /* buffer for IPC_STAT & IPC_SET */
+    u_short *array;         /* array for GETALL & SETALL */
+};
 
 void print_menu(int term_size) {
     printf("WELCOME TO THE TYPING GAME BY FIONA, SOOJIN, AND JOYCE\n\nPress the corresponding number key to select menu items\n\n1) Start New Game\n2) View Leaderboard\n3) Exit\n");
